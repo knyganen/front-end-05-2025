@@ -23,26 +23,31 @@
   flex-wrap: nowrap;
   margin-top: 50px;
   gap: 30px;
-}
-
-.navigation-pictures img {
-  height: 150px;
-  width: 250px;
-  cursor: pointer;
-  transition: 0.5s;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  
-  
  
 }
 
-.navigation-pictures img:hover {
-  scale: 1.1;
-  transition: 0.5s;
-  box-shadow: 0 8px 30px;
   
-}
+  .navigation-pictures img {
+    height: 180px;
+    width: 250px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* softer shadow */
+    border-radius: 12px;
+  }
+  
+  
+
+  .navigation-pictures img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 140, 255, 0.25); /* subtle modern blue glow */
+    filter: brightness(1.03);
+  }
+
+
+  
+  
+
 
 html, body {
   background-color: #f4eded;
@@ -59,6 +64,7 @@ html, body {
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  
 }
 
 .Pealkiri {
@@ -85,10 +91,10 @@ text-align: center;
   align-items: center;
   justify-content: space-around;
   color: darkblue;
-  background-color: rgb(241, 243, 246);
+  background-color: #eaeaea;
   width: 280px;
   height: 280px;
-  margin-top: 20px 10px;
+  margin: 20px 10px;
   padding: 20px;
   border-radius: 20px;
   text-align: center;
@@ -110,7 +116,7 @@ text-align: center;
   transition: 1s;
   cursor: pointer;
   transform: scale(1.1);
-  box-shadow: o 8px 30px #1e8282;
+  box-shadow: 0 8px 30px #020018;
   background-color: #dee3f7;
   color: rgb(246, 241, 241);
   
