@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
 
 function App() {
@@ -8,6 +6,7 @@ function App() {
 
   return (
     <>
+
       <button className='nupp'>nupp</button>
 
       <img 
@@ -62,8 +61,9 @@ function App() {
       <iframe width="420" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY">
       </iframe>
 
-      
+     
     </>
+  
   );
 }
 

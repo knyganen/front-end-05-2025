@@ -44,3 +44,7 @@
 body {
   background-color: cornsilk;
 }
+
+.valitud {
+  font-weight: bold;
+}

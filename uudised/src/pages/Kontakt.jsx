@@ -9,17 +9,17 @@ function Kontakt() {
 <div>See on kontaktide leht, nähtav localhost: 5173/kontakt aadressil</div>
 <div>Võta meiega ühendust:</div>
 <br />
-<div onClick={() => muudaN2itaTelKristiine(!n2itaTelKristiine)}>Kristiine keskus</div>
-{n2itaTelKristiine && <div>+34567769</div>}
-<div>Endla 45</div>
+<div className={n2itaTelKristiine === true ? "valitud" : undefined} onClick={() => muudaN2itaTelKristiine(!n2itaTelKristiine)}>Kristiine keskus</div>
+{n2itaTelKristiine && <div className="valitud">+34567769</div>}
+<div className={n2itaTelKristiine === true ? "valitud" : undefined}>Endla 45</div>
 <br />
-<div onClick={() => muudaN2itaTelYlemiste(!n2itaTelYlemiste)}>Ülemiste keskus</div>
-{n2itaTelYlemiste && <div>+34567888</div>}
-<div>Suur-Sõjamäe 4</div>
+<div className={n2itaTelYlemiste === true ? "valitud" : undefined} onClick={() => muudaN2itaTelYlemiste(!n2itaTelYlemiste)}>Ülemiste keskus</div>
+{n2itaTelYlemiste && <div className="valitud">+34567888</div>}
+<div className={n2itaTelYlemiste === true ? "valitud" : undefined}>Suur-Sõjamäe 4</div>
 <br />
-<div onClick={() => muudaN2itaTelTasku(!n2itaTelTasku)}>Tasku keskus</div>
-{n2itaTelTasku && <div>+34567000</div>}
-<div>Turu 2</div>
+<div className={n2itaTelTasku === true ? "valitud" : undefined} onClick={() => muudaN2itaTelTasku(!n2itaTelTasku)}>Tasku keskus</div>
+{n2itaTelTasku && <div className="valitud">+34567000</div>}
+<div className={n2itaTelTasku === true ? "valitud" : undefined}>Turu 2</div>
 
 
   </div>
