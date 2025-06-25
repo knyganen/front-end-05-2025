@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ArraysHome from './ArraysHome'
 import tootajadFailist from "../../data/tootajad.json"
+import { Link } from 'react-router-dom';
 
 // Sorteeri
   // 1. A-Z
@@ -60,7 +61,7 @@ function Tootajad() {
     }
 
     function sorteeriSonadArv() {             
-      tootajad.sort((a,b) => a.split("").length - b.split("").length); 
+      tootajad.sort((a,b) => a.eesnimi.split("").length - b.eesnimi.split("").length); 
       setTootajad(tootajad.slice());
             
       }
@@ -130,12 +131,20 @@ function Tootajad() {
 
         <div>Kokku: {tootajad.length} töötajat </div>  
         {tootajad.map((tootaja, index) => 
-        <div key={tootaja}>
-            {tootaja}
+        <div key={tootaja.eesnimi}>
+            {/* {tootaja} -- see koht tekitab sellise errori, et leht on valge. 
+            saan välja näidata tema omadusi, nt {tootaja.eesnimi} */}
+            <div>{tootaja.eesnimi} </div>
             <button onClick={() => kustuta(index)} >x</button>
+            <Link to={"/tootaja/" + tootaja.nimi}>
+        <button>Vaata lähemalt</button>
+        </Link>
             </div>)}
     </div>
   )
 }
 
 export default Tootajad
+
+//Töötajad:
+//{"eesnimi": "Toomas", "ametikoht": "Keevitaja", "vanus": 23}

@@ -1,0 +1,69 @@
+
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import productsFromFile from "../../data/products.json"
+import { useRef } from "react"
+
+function EditProduct() {
+  const { index } = useParams();
+  const found = productsFromFile[index];
+  const titleRef = useRef();
+  const priceRef = useRef();
+  const imageRef = useRef();
+  const descriptionRef = useRef();
+  const categoryRef = useRef();
+  const ratingRef = useRef();
+  const activeRef = useRef();
+  const navigate = useNavigate();
+
+  if (!found) {
+    return (
+      <div>
+        ❌ Product not found. <br />
+        Please go back to <a href="/admin/maintain-products">Maintain Products</a>.
+      </div>
+    );
+  }
+
+
+  const edit = () => {
+    productsFromFile[index] =  {
+      "title": titleRef.current.value, 
+      "price": Number(priceRef.current.value),
+      "image": imageRef.current.value,
+      "description": descriptionRef.current.value,
+      "category": categoryRef.current.value,
+      "rating": Number(ratingRef.current.value),
+      "active": activeRef.current.checked
+    };
+
+    navigate("/admin/maintain-products");
+  }
+
+
+  return (
+    <div>
+      <label>Title</label> <br />
+      <input ref={titleRef}  type="text" defaultValue={found.title}/> <br />
+      <label>Price</label> <br />
+      <input ref={priceRef}  type="number" defaultValue={found.price} /> <br />
+      <label>Image</label> <br />
+      <input ref={imageRef}  type="text"defaultValue={found.image} /> <br />
+      <label>Description</label> <br />
+      <input ref={descriptionRef}  type="text" defaultValue={found.description}/> <br />
+      <label>Category</label> <br />
+      <input ref={categoryRef}  type="text" defaultValue={found.category}/> <br />
+      <label>Rating</label> <br />
+      <input ref={ratingRef}  type="number" defaultValue={found.rating} step="0.1" min="0" max="5" /> <br />
+      <label>Active</label> <br />
+      <input ref={activeRef} type="checkbox" defaultChecked={found.active} /> <br />
+      <button onClick={edit}>Save</button>
+      <Link to={"/admin/edit-product/" + index} >
+              <button>Change</button>
+              </Link>
+      
+    </div>
+  )
+}
+
+export default EditProduct
+

@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import ArraysHome from './ArraysHome'
 import tootedFailist from "../../data/tooted.json"
+//import ostukorvFailist from "../../data/ostukorv.json"
+import { ToastContainer, toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 
 function Tooted() {
@@ -56,6 +59,16 @@ function Tooted() {
       setTooted(vastus);
     }
 
+    function lisaOstukorvi(toode) {
+      const ostukorvLS = JSON.parse(localStorage.getItem("ostukorv")) || [];
+      ostukorvLS.push(toode);
+      localStorage.setItem("ostukorv", JSON.stringify(ostukorvLS));
+
+    //ostukorvFailist.push(toode);
+    toast.success("Ostukorvi lisatud!");
+//ei pea tegema setTooted või setOstukorv, sest ma ei uuenda HTMLi
+   } 
+
   return (
     <div>
       <ArraysHome />
@@ -75,9 +88,28 @@ function Tooted() {
       <br />
       <button onClick={() => setTooted(tootedFailist.slice())} >Originaali</button>
 
-      {tooted.map(toode => <div key={toode}>{toode}</div>)}  
+      {tooted.map(toode => 
+      <div key={toode.nimi}>
+        {/* {toode} */}
+        <img className="pilt" src={toode.pilt} alt="" />
+        <div>{toode.nimi} </div>
+        <div>{toode.hind} </div>
+        <button onClick={() => lisaOstukorvi(toode)} >Lisa ostukorvi</button>
+        <Link to={"/toode/" + toode.nimi}>
+        <button>Vaata lähemalt</button>
+        </Link>
+        </div>)}  
+
+        <ToastContainer
+       position="bottom-right"
+       autoClose={2000}
+       theme="colored"
+      />
     </div>
   )
 }
 
 export default Tooted
+
+//täpselt sama mis autodel
+// {nimi, hind, aktiivne, pilt}

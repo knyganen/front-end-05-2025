@@ -3,6 +3,7 @@ import './App.css'
 import { Link, Route, Routes } from 'react-router-dom';
 import LisaJooke from './pages/LisaJooke'
 import HaldaJooke from './pages/HaldaJooke'
+import Jook from './pages/Jook';
 
 
 
@@ -16,6 +17,7 @@ return (
         <Route path="/" exact element={<div>Tere!</div>}  ></Route>
         <Route path="/lisa" exact element={<LisaJooke />}  ></Route>
         <Route path="/halda" exact element={<HaldaJooke/>}  ></Route>
+        <Route path="/jook:number" exact element={<HaldaJooke/>}  ></Route>
       </Routes>
    </>
   )

@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import hinnadFailist from "../../data/hinnad.json"
+import ArraysHome from './ArraysHome';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 //renderdamine --> väljakuvamine
 //re-renderdamine --> setteriga HTMLi muutmine
 
@@ -19,6 +22,7 @@ import hinnadFailist from "../../data/hinnad.json"
 function Hinnad() {                 //0  1   2 jne  kui tahta viimast kustutada, siis all length -1
 
 const [hinnad, setHinnad] = useState(hinnadFailist.slice());
+const otsingRef = useRef();
 
 
 const kustutaEsimene = () => {
@@ -47,37 +51,52 @@ const kustuta = (index) => {
 }
 
 const sorteeriKahanevalt = () => {
-    hinnad.sort((a,b) => b - a)
+    hinnad.sort((a,b) => b.number - a.number)
     setHinnad(hinnad.slice());
 }
 
 const sorteeriKasvavalt = () => {
-    hinnad.sort((a,b) => a - b) 
+    hinnad.sort((a,b) => a.number - b.number) 
     setHinnad(hinnad.slice());
 }
 
-const filtreeriVaiksemaidKui50 = () => {
-    const vastus = hinnadFailist.filter(hind => hind < 50);
+const filtreeriVaiksemaidKui25 = () => {
+    const vastus = hinnadFailist.filter(hind => hind.number < 50);
     setHinnad(vastus);
 
 }
 
-const filtreeriSuuremaidKui100 = () => {
-    const vastus = hinnadFailist.filter(hind => hind > 100);
+const filtreeriSuuremaidKui50 = () => {
+    const vastus = hinnadFailist.filter(hind => hind.number > 100);
     setHinnad(vastus);
 }
 
+const arvutaKokku = () => {
+    let summa = 0;
+    hinnad.forEach(hind => summa = summa + hind.number);
+    return summa;
 
+}
+    //arvuta numbrid kokku nagu ostukorvis
+
+    //kui vaja numbrit kuvada otsingus --> toString()
+    function otsi () {
+        const vastus = hinnadFailist.filter(hind => hind.number.toString().includes(otsingRef.current.value));
+        setHinnad(vastus);
+      
+      }
 
 return (
     <div>
-       
+        <label>Otsi</label>
+        <input ref={otsingRef} onChange={otsi}   type="number" />
+       <ArraysHome />
 
         <button onClick={sorteeriKahanevalt}>Sorteeri kahanevalt</button>
         <button onClick={sorteeriKasvavalt}>Sorteeri kasvavalt</button>
         <br /><br />
-        <button onClick={filtreeriVaiksemaidKui50}>Jäta alles väiksemad kui 50</button>
-        <button onClick={filtreeriSuuremaidKui100}>Jäta alles suuremad kui 100</button>
+        <button onClick={filtreeriVaiksemaidKui25}>Jäta alles väiksemad kui 25</button>
+        <button onClick={filtreeriSuuremaidKui50}>Jäta alles suuremad kui 50</button>
         <br /><br />
         <button onClick={() => setHinnad([])} >Tühjenda</button>
         <button onClick={kustutaEsimene} >Kustuta esimene</button>
@@ -88,12 +107,23 @@ return (
         <button onClick={() => setHinnad(hinnadFailist)} >Võta filtrid maha</button>
         <div>Kokku: {hinnad.length} tk </div>  
         {hinnad.map((hind, index) => 
-        <div key={hind}>
-            {hind}
+        <div key={hind.number}>
+            <div>{hind.number} </div>
+            <div>{hind.sonana} </div>
             <button onClick={() => kustuta(index)} >x</button>
+            <Link to={"/hind/" + index} >
+            <button>Vt lähemalt</button>
+            </Link>
+        
+
             </div>)}
+            <div>Hindade summa: {arvutaKokku()} €</div>
     </div>
   )
 }
 
 export default Hinnad
+
+//hinnad:
+// {"number": 10, "sonana": "kümme"}
+//{"number": 123, "sonana"_ "sada kakskümmend kolm"}

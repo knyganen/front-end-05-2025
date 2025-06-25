@@ -7,7 +7,9 @@ import { useRef } from 'react';
 function HaldaTootajad() {
 
 const [tootajad, setTootajad] = useState(tootajadFailist.slice());
-const tootajaRef = useRef();
+const eesnimiRef = useRef();
+const ametikohtRef = useRef();
+const vanusRef = useRef();
 
 const kustuta = (index) => {
 tootajadFailist.splice(index, 1);
@@ -16,31 +18,52 @@ setTootajad(tootajadFailist.slice());
 
 
 const lisa = () => {
-  tootajadFailist.push(tootajaRef.current.value);
+  tootajadFailist.push({
+    "eesnimi": eesnimiRef.current.value,
+    "ametikoht": ametikohtRef.current.value,
+    "vanus": vanusRef.current.value
+  });
+
   setTootajad(tootajadFailist.slice());
-  tootajaRef.current.value = "";
-}
+  eesnimiRef.current.value = "";
+  ametikohtRef.current.value = "";
+  vanusRef.current.value = "";
+};
 
   return (
     <div>
       <HaldaHome />
-      <label>Tootaja</label> <br />
-      <input ref={tootajaRef}  type="text" /> <br />
+      <label>Eesnimi</label> <br />
+      <input ref={eesnimiRef}  type="text" /> <br />
+      <label>Ametikoht</label> <br />
+      <input ref={ametikohtRef}  type="text" /> <br />
+      <label>Vanus</label> <br />
+      <input ref={vanusRef}  type="text" /> <br />
       <button onClick={lisa}>Sisesta</button> <br />
       <table>
         <thead>
           <tr>
             <th>Index</th>
-            <th>Töötaja</th>
+            <th>Eesnimi</th>
+            <th>Ametikoht</th>
+            <th>Vanus</th>
             <th>Kustuta</th>
           </tr>
         </thead>
         <tbody>
           {tootajad.map((tootaja, index) => 
-          <tr key={tootaja}>
+          <tr key={index}>
             <td>{index} </td>
-            <td>{tootaja}</td> 
+            <td>{tootaja.eesnimi}</td> 
+            <td>{tootaja.ametikoht}</td> 
+            <td>{tootaja.vanus}</td> 
             <td><button onClick={() => kustuta(index)}>x</button></td>
+            <td>
+              <Link to={"/muuda-esindus/" + index}>
+                <button>Muuda</button>
+                </Link>
+                </td>
+            
             </tr>)}
         </tbody>
       </table>

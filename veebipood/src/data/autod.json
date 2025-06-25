@@ -1,9 +1,9 @@
 [
-    "BMW",
-    "Nobe",
-    "Lexus",
-    "Tesla",
-    "Audi",
-    "Porsche",
-    "Mercedes"
+   {"nimi": "BMW", "hind": 35000, "aktiivne": true, "pilt": "https://www.bmw.ee/content/dam/bmw/common/all-models/4-series/series-overview/bmw-4-series-seo-page-ms-history-02.jpg"},
+   {"nimi": "Lexus", "hind": 25000, "aktiivne": true, "pilt": "https://content.presspage.com/uploads/1850/1920_2016-naias-lexus-lc-500-012.jpg?10000"},
+   {"nimi": "Tesla", "hind": 85000, "aktiivne": false, "pilt": "https://upload.wikimedia.org/wikipedia/commons/2/20/Tesla_Model_S_%2828898945604%29.jpg"},
+   {"nimi": "Audi", "hind": 88000, "aktiivne": true, "pilt": "https://www.topgear.com/sites/default/files/images/news-article/2019/11/6c41c411a92ea50b502c8eef1d49cad0/a1914471_large.jpg"},
+   {"nimi": "Porsche", "hind": 80000, "aktiivne": false, "pilt": "https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_1290x726/dam/pnr/2021/Products/Free-Software-Update-Taycan/Free-Software-Update-for-early-Porsche-Taycan_2.jpeg/jcr:content/Free%20Software-Update%20for%20early%20Porsche%20Taycan_2.jpeg"},
+   {"nimi": "Mercedes", "hind": 81000, "aktiivne": true, "pilt": "https://upload.wikimedia.org/wikipedia/commons/7/76/Mercedes-Benz_SLR_McLaren_%288615164079%29.jpg"}
+    
 ]
