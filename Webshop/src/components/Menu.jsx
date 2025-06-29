@@ -19,7 +19,6 @@ function Menu() {
             <Nav.Link as={Link} to="/login">Log in</Nav.Link>
             <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-            <Nav.Link as={Link} to="/location">Location</Nav.Link>
             <Link to="/parcelmachines"><button className="button">Parcel machines</button></Link>
           </Nav>
         </Navbar.Collapse>

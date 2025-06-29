@@ -2,8 +2,7 @@ import { useState } from "react"
 import productsFromFile from "../../data/products.json"
 import { Link } from 'react-router-dom'
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "../../css/HomePage.css";
 
 
 
@@ -14,10 +13,7 @@ function HomePage() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push(clickedProduct);
     localStorage.setItem("cart", JSON.stringify(cart));
-    toast.success("Product added to cart!", {
-      position: "bottom-right",
-      autoClose: 1000
-    });
+    toast.success("Product added to cart!", );
   };
 
   const sortAZ = () => {
@@ -93,19 +89,20 @@ function HomePage() {
       
 
 
-      {products.map((product) =>
-        <div key={product.id}>
-          <img style={{ width: "100px" }} src={product.image} alt="" />
-          <div>{product.title}</div>
-          <div>{Number(product.price).toFixed(2)} €</div>
+      <div className="products">
+        {products.map((product)  =>
+        <div key={product.id} className="home-product">
+          <img className="home-picture"  src={product.image} alt="" />
+          <div className="home-title">{product.title}</div>
+          <div className="home-price">{Number(product.price).toFixed(2)} €</div>
           <div>Rating: {product.rating?.rate ?? "N/A"} </div>
-          <button onClick={() => addToCart(product)}>Add to cart</button>
+          <button onClick={() => addToCart(product)}>Add to cart</button> 
           <Link to={"/product/" + product.title}>
             <button>View details</button>
           </Link>
           <br /><br />
         </div>
-      )}
+      )}</div>
       
 
     </div>

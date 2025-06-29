@@ -1,29 +1,27 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import "../../css/cart.css";
+import minusIcon from "../../assets/minus.png";
+import plusIcon from "../../assets/plus.png";
+import binIcon from "../../assets/bin.png";
 
 function Cart() {
   const [products, setProducts] = useState(JSON.parse(localStorage.getItem("cart")) || []);
 
   const remove = (index) => {
-    const updatedProducts = [...products];
-    const removedProduct = updatedProducts[index]?.title || "Product";
-    updatedProducts.splice(index, 1);
-    setProducts(updatedProducts);
-    localStorage.setItem("cart", JSON.stringify(updatedProducts));
-    toast.error(`${removedProduct} removed from cart`, {
-      position: "bottom-right",
-      autoClose: 1500,
-      theme: "colored",
-    });
+    //const updatedProducts = [...products];
+    //const removedProduct = updatedProducts[index]?.title || "Product";
+    products.splice(index, 1);
+    setProducts(products.slice());
+    localStorage.setItem("cart", JSON.stringify(products));
+    toast.error(`${products[index].title} removed from cart`);
   };
 
   const emptyCart = () => {
     setProducts([]);
     localStorage.setItem("cart", JSON.stringify([]));
     toast.info("Cart emptied", {
-      position: "bottom-right",
-      autoClose: 1500,
-      theme: "colored",
+      
     });
   };
 
@@ -42,9 +40,18 @@ function Cart() {
       ) : (
         <>
           {products.map((product, index) => (
-            <div key={index}>
-              {product.title} — {product.price.toFixed(2)} €
-              <button onClick={() => remove(index)}>x</button>
+            <div key={index} className="product" >
+              <img className="picture" src={product.image} alt="" />
+              <div className="title">{product.title}</div>
+              <div className="price">{product.price.toFixed(2)} €</div>
+              <div className="quantity">
+             
+              <img className="button" src={minusIcon}  alt="" />
+              <div>1 tk</div>
+              <img className="button" src={plusIcon}  alt="" />
+              </div>
+              <div className="total">{product.price.toFixed(2)} €</div>
+              <img className="button" onClick={() => remove(index)} src={binIcon} alt="" />
             </div>
           ))}
         </>

@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /*padding: 2rem;*/
   text-align: center;
 }
 
@@ -11,3 +11,8 @@
   object-fit: contain;
 }
 
+.map {
+  height: 300px;
+  filter: brightness(40%), grayscale(80%);
+  border-radius: 20px;
+  }

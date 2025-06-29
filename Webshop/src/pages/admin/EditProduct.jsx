@@ -15,15 +15,6 @@ function EditProduct() {
   const activeRef = useRef();
   const navigate = useNavigate();
 
-  if (!found) {
-    return (
-      <div>
-        ❌ Product not found. <br />
-        Please go back to <a href="/admin/maintain-products">Maintain Products</a>.
-      </div>
-    );
-  }
-
 
   const edit = () => {
     productsFromFile[index] =  {
@@ -39,6 +30,21 @@ function EditProduct() {
     navigate("/admin/maintain-products");
   }
 
+  if (!found) {
+    return (
+      <div>
+        ❌ Product not found. <br />
+        Please go back to <Link to="/admin/maintain-products">Maintain Products</Link> page.
+      </div>
+    );
+  }
+
+ // navigeerimiseks/URL vahetuseks:
+// <Link to=""    HTML ---> suunamiseks Reacti siseselt (App.jsx sees selline path="" olemas)
+// <a href=""     HTML ---> suunamiseks Reactist välja (teeb refreshi)
+
+// navigate + useNavigate()  JS ---> suunamiseks Reacti siseselt (App.jsx sees selline path="" olemas)
+// window.location.href=     JS ---> suunamiseks Reactist välja (teeb refreshi)
 
   return (
     <div>
@@ -57,9 +63,7 @@ function EditProduct() {
       <label>Active</label> <br />
       <input ref={activeRef} type="checkbox" defaultChecked={found.active} /> <br />
       <button onClick={edit}>Save</button>
-      <Link to={"/admin/edit-product/" + index} >
-              <button>Change</button>
-              </Link>
+      
       
     </div>
   )

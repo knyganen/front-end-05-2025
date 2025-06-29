@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import './App.css'
 import HomePage from './pages/global/HomePage'
 import ContactUs from './pages/global/ContactUs'
-import Location from './pages/Location'
 import Shops from './pages/global/Shops'
 import Cart from './pages/global/Cart'
 import SingleProduct from './pages/global/SingleProduct'
@@ -18,7 +16,6 @@ import NotFound from './pages/global/NotFound'
 import Menu from './components/Menu'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import ParcelMachines from './pages/admin/ParcelMachines'
 
 
@@ -48,7 +45,6 @@ function App() {
         <Route path="/login" element={ <Login/>} />
         <Route path="/signup" element={ <Signup />} />
 
-        <Route path="/location" element={ <Location/>} />
         <Route path= '/parcelmachines' element={ <ParcelMachines/>} />
 
         <Route path="/*" element={ <NotFound />} />
