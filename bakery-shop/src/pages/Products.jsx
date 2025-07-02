@@ -6,6 +6,7 @@ function Products() {
   const priceRef = useRef();
   const quantityRef = useRef();
   const storeRef = useRef();
+
   const [products, setProducts] = useState([
     { name: 'Cupcake', price: 1.99, quantity: 7, store: 'Downtown store' },
     { name: 'Cheesecake', price: 2, quantity: 2, store: 'Ülemiste store' },
@@ -22,13 +23,18 @@ function Products() {
   const addProduct = () => {
     const newProduct = {
       name: nameRef.current.value,
-      price: priceRef.current.value,
-      quantity: quantityRef.current.value,
+      price: Number(priceRef.current.value),
+      quantity: Number(quantityRef.current.value),
       store: storeRef.current.value,
-    }
-    products.push(newProduct);
-    setProducts(products.slice());
-  }
+    };
+
+    const updatedProducts = products.slice();
+    updatedProducts.push(newProduct);
+    setProducts(updatedProducts);
+
+  };
+
+  const sortedProductsByPrice = products.slice().sort((a, b) => a.price - b.price);
 
   return (<div>
     <div className="container">
@@ -44,15 +50,16 @@ function Products() {
         </thead>
         <tbody>
         {/* TODO: Order the products by price */}
-        {products.map(product => 
-            <tr key={product.name + product.price}>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              {/*  TODO: Display the quantity in red if it is lower than 3 */}
-              <td>{product.quantity}</td> 
+        {sortedProductsByPrice.map((product, index) => (
+            <tr key={index}>
+              <td className="fw-bold">{product.name}</td>
+              <td>{product.price.toFixed(2)}</td>
+              <td className={product.quantity < 3 ? "text-danger" : ""}>
+                {product.quantity}
+              </td>
               <td>{product.store}</td>
             </tr>
-          )}
+          ))}
         <tr className="input-row">
           <td><input type="text" ref={nameRef} placeholder="Product" className="form-control" /></td>
           <td><input type="text" ref={priceRef} placeholder="Price" className="form-control" /></td>

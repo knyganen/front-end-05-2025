@@ -1,31 +1,37 @@
 import { useState, useRef } from "react";
-import productsFromFile from "../../data/products.json";
+//import productsFromFile from "../../data/products.json";
 import { Link } from "react-router-dom";
 import AdminHome from "./AdminHome";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 function MaintainProducts() {
-  const [products, setProducts] = useState(productsFromFile.slice());
+  const [products, setProducts] = useState([]); //miks 2 usestate: väljanäidatavad tooted. kõikuvas seisundis -> HTMls
+  const [dbProducts, setDbProducts] = useState([]); //andmebaasitooted. kogu aeg samas seisus, see ei muutu. Varem kasutasime productsFromFile
   const searchRef = useRef();
+  const url =
+    "https://webshop-katre-default-rtdb.europe-west1.firebasedatabase.app/products.json";
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        setProducts(json || []);
+        setDbProducts(json || []);
+      });
+  }, []);
 
   const deleteProduct = (index) => {
-    const updatedProducts = products.slice();
-    const deletedProduct = updatedProducts[index]?.title || "Product";
-    updatedProducts.splice(index, 1);
-    setProducts(updatedProducts);
-    toast.error(`${deletedProduct} deleted!`);
+    dbProducts.splice(index, 1);
+    setProducts(dbProducts.slice());
+    toast.error(`Product deleted!`);
+    fetch(url, { method: "PUT", body: JSON.stringify(dbProducts) });
   };
-
 
   const search = () => {
     const keyword = searchRef.current.value.toLowerCase();
 
-    if (keyword === "") {
-      setProducts(productsFromFile.slice());
-      return;
-    }
-
-    const result = products.filter((product) =>
+    const result = dbProducts.filter((product) =>
       product.title.toLowerCase().includes(keyword)
     );
     setProducts(result);
@@ -34,12 +40,8 @@ function MaintainProducts() {
   return (
     <div>
       <AdminHome />
-
       <label>Search product</label> <br />
       <input ref={searchRef} type="text" onChange={search} /> <br /> <br />
-
-      
-
       <table>
         <thead>
           <tr>
@@ -51,7 +53,7 @@ function MaintainProducts() {
             <th>Category</th>
             <th>Product active</th>
             <th>Rating</th>
-          
+
             <th>Delete</th>
             <th>Edit</th>
           </tr>
@@ -60,26 +62,29 @@ function MaintainProducts() {
           {products.map((product, index) => (
             <tr
               key={index}
-              className={product.active ? "active-product" : "notactive-product"}
+              className={
+                product.active ? "active-product" : "notactive-product"
+              }
             >
               <td>{index}</td>
-               <td>{product.title}</td>
-               <td>{product.price.toFixed(2)} €</td>
-              <td>{product.image && (
+              <td>{product.title}</td>
+              <td>{product.price.toFixed(2)} €</td>
+              <td>
+                {product.image && (
                   <img className="picture" src={product.image} alt="Product" />
                 )}
               </td>
               <td>{product.description} </td>
               <td>{product.category} </td>
-              
+
               <td>{product.active ? "✅" : "❌"}</td>
-              
+
               <td>
                 {typeof product.rating === "object"
                   ? product.rating.rate + " ★ (" + product.rating.count + ")"
                   : product.rating}
               </td>
-            
+
               <td>
                 <button onClick={() => deleteProduct(index)}>x</button>
               </td>
