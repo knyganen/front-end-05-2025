@@ -1,11 +1,14 @@
-import { useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 
 const ContactUs = () => {
-  const form = useRef();
+  const form = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: FormEvent) => {
+    if (form.current === null) {
+      return;
+    }
     e.preventDefault();
 
     emailjs
@@ -17,7 +20,7 @@ const ContactUs = () => {
           toast.success("Email sent successfully!");
         },
         (error) => {
-          toast.error("Failed to send email.");
+          toast.error("Failed to send email." + error.text);
         }
       );
   };

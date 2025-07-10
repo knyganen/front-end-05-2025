@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { ParcelMachine } from "../../models/ParcelMachine";
 
 
 function ParcelMachines() {
-    const [parcelMachines, setParcelMachines] = useState([]);
+    const [parcelMachines, setParcelMachines] = useState<ParcelMachine[]>([]);
 
     useEffect(() => {
         fetch("https://www.omniva.ee/locations.json")

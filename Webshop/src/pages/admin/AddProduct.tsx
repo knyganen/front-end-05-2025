@@ -1,22 +1,24 @@
 import { useRef, useState } from "react"
 import { toast } from "react-toastify"
 import { useEffect } from "react";
+import type { Product } from "../../models/Products";
+import type { Category } from "../../models/Category";
 
 
 function AddProduct() {
   const [message, setMessage] = useState("");
-  const idRef = useRef();
-  const titleRef = useRef();
-  const priceRef = useRef();
-  const imageRef = useRef();
-  const descriptionRef = useRef();
-  const categoryRef = useRef();
-  const ratingRef = useRef();
-  const activeRef = useRef();
+  const idRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLInputElement> (null);
+  const priceRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLInputElement>(null);
+  const categoryRef = useRef<HTMLSelectElement>(null);
+  const ratingRef = useRef<HTMLInputElement>(null);
+  const activeRef = useRef<HTMLInputElement>(null);
   const productsUrl = "https://webshop-katre-default-rtdb.europe-west1.firebasedatabase.app/products.json";
   const categoriesUrl = "https://webshop-katre-default-rtdb.europe-west1.firebasedatabase.app/categories.json";
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     fetch(categoriesUrl)
@@ -31,6 +33,14 @@ function AddProduct() {
   }, []);
 
   function add() {
+    if(idRef.current === null || titleRef.current === null ||
+      priceRef.current === null || imageRef.current === null ||
+      descriptionRef.current === null || categoryRef.current === null ||
+      ratingRef.current === null || activeRef.current === null
+    ) {
+      return;
+    }
+
     if (titleRef.current.value === "") {
       setMessage("Uh oh, title can't be empty!");
       return;

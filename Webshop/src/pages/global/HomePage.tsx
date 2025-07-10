@@ -1,17 +1,20 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link } from 'react-router-dom'
 import { toast } from "react-toastify";
 import "../../css/HomePage.css";
 import { useEffect } from "react";
-
-
+import { CartSumContext } from "../../context/CartSumContext";
+import { Product } from "../../models/Products";
+import { Category } from "../../models/Category";
+import { CartProduct } from "../../models/CartProduct";
 
 function HomePage() {
   const productsUrl = "https://webshop-katre-default-rtdb.europe-west1.firebasedatabase.app/products.json";
   const categoriesUrl = "https://webshop-katre-default-rtdb.europe-west1.firebasedatabase.app/categories.json";
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [dbProducts, setDbProducts] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [dbProducts, setDbProducts] = useState<Product[]>([]);
+  const {cartSum, setCartSum} = useContext(CartSumContext);
 
   useEffect(() => {
     fetch(categoriesUrl)
@@ -28,11 +31,20 @@ function HomePage() {
         })
     }, []);
 
-  const addToCart = (clickedProduct) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(clickedProduct);
+  const addToCart = (clickedProduct: Product) => {
+    const cart: CartProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
+    const cartProduct = cart.find(cp => cp.product.id === clickedProduct.id)
+    if (cartProduct !== undefined) {
+      //cartProduct.quantity++;
+      //cartProduct.quantity+= 1;
+      cartProduct.quantity = cartProduct.quantity + 1;
+    } else {
+       cart.push({product: clickedProduct, quantity: 1});
+    }
+   
     localStorage.setItem("cart", JSON.stringify(cart));
     toast.success("Product added to cart!", );
+    setCartSum(cartSum + clickedProduct.price);
   };
 
   const sortAZ = () => {
@@ -65,7 +77,7 @@ function HomePage() {
     setProducts(products.slice());
   }
 
-  const filterByCategory = (clickedCategory) => {
+  const filterByCategory = (clickedCategory: string) => {
     const result = dbProducts.filter(product => product.category === clickedCategory.toLowerCase());
     setProducts(result);
   }

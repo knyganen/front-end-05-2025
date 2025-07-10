@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom'
+import { Product } from '../../models/Products';
 
 function SingleProduct() {
   const productsUrl = "https://webshop-katre-default-rtdb.europe-west1.firebasedatabase.app/products.json";
   const {productName} = useParams();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const found = products.find(product => product.title === productName)
   
   useEffect(() => {

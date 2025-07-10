@@ -1,14 +1,15 @@
 import { useState, useRef } from "react";
 //import productsFromFile from "../../data/products.json";
 import { Link } from "react-router-dom";
-import AdminHome from "./AdminHome";
+import AdminHome from "./AdminHome.tsx";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import type { Product } from "../../models/Products";
 
 function MaintainProducts() {
-  const [products, setProducts] = useState([]); //miks 2 usestate: väljanäidatavad tooted. kõikuvas seisundis -> HTMls
-  const [dbProducts, setDbProducts] = useState([]); //andmebaasitooted. kogu aeg samas seisus, see ei muutu. Varem kasutasime productsFromFile
-  const searchRef = useRef();
+  const [products, setProducts] = useState<Product[]>([]); //miks 2 usestate: väljanäidatavad tooted. kõikuvas seisundis -> HTMls
+  const [dbProducts, setDbProducts] = useState<Product[]>([]); //andmebaasitooted. kogu aeg samas seisus, see ei muutu. Varem kasutasime productsFromFile
+  const searchRef = useRef<HTMLInputElement>(null);
   const url =
     "https://webshop-katre-default-rtdb.europe-west1.firebasedatabase.app/products.json";
 
@@ -21,7 +22,7 @@ function MaintainProducts() {
       });
   }, []);
 
-  const deleteProduct = (index) => {
+  const deleteProduct = (index: number) => {
     dbProducts.splice(index, 1);
     setProducts(dbProducts.slice());
     toast.error(`Product deleted!`);
@@ -29,6 +30,9 @@ function MaintainProducts() {
   };
 
   const search = () => {
+    if (searchRef.current === null) {
+      return;
+    }
     const keyword = searchRef.current.value.toLowerCase();
 
     const result = dbProducts.filter((product) =>
@@ -68,7 +72,7 @@ function MaintainProducts() {
             >
               <td>{index}</td>
               <td>{product.title}</td>
-              <td>{product.price.toFixed(2)} €</td>
+              <td>{typeof product.price} €</td>
               <td>
                 {product.image && (
                   <img className="picture" src={product.image} alt="Product" />
