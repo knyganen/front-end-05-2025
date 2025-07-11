@@ -16,8 +16,6 @@ import NotFound from './pages/global/NotFound'
 import Menu from './components/Menu'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
-import ParcelMachines from './pages/admin/ParcelMachines'
-
 
 
 
@@ -44,8 +42,6 @@ function App() {
 
         <Route path="/login" element={ <Login/>} />
         <Route path="/signup" element={ <Signup />} />
-
-        <Route path= '/parcelmachines' element={ <ParcelMachines/>} />
 
         <Route path="/*" element={ <NotFound />} />
       </Routes>

@@ -7,6 +7,8 @@ import { CartSumContext } from "../../context/CartSumContext";
 import { Product } from "../../models/Products";
 import { Category } from "../../models/Category";
 import { CartProduct } from "../../models/CartProduct";
+import SortButtons from "../../components/home/SortButtons";
+import CarouselGallery from "../../components/home/CarouselGallery";
 
 function HomePage() {
   const productsUrl = "https://webshop-katre-default-rtdb.europe-west1.firebasedatabase.app/products.json";
@@ -47,40 +49,7 @@ function HomePage() {
     setCartSum(cartSum + clickedProduct.price);
   };
 
-  const sortAZ = () => {
-    products.sort((a,b) => a.title.localeCompare(b.title));
-    setProducts(products.slice());
-  }
-
-  const sortZA = () => {
-    products.sort((a,b) => b.title.localeCompare(a.title));
-    setProducts(products.slice());
-  }
-
-  const sortPriceAZ = () => {
-    products.sort((a,b) => Number(a.price) - Number(b.price));
-    setProducts(products.slice());
-  }
-
-  const sortPriceZA = () => {
-    products.sort((a,b) => Number(b.price) - Number(a.price));
-    setProducts(products.slice());
-  }
-
-  const sortRatingAZ = () => {
-    products.sort((a,b) => Number(a.rating.rate) - Number(b.rating.rate));
-    setProducts(products.slice());
-  }
-
-  const sortRatingZA = () => {
-    products.sort((a,b) => Number(b.rating.rate) - Number(a.rating.rate));
-    setProducts(products.slice());
-  }
-
-  const filterByCategory = (clickedCategory: string) => {
-    const result = dbProducts.filter(product => product.category === clickedCategory.toLowerCase());
-    setProducts(result);
-  }
+  
 
   // const filterByMensClothing = () => {
   //   const result = dbProducts.filter(product => product.category === "men's clothing");
@@ -101,16 +70,16 @@ function HomePage() {
     setProducts(dbProducts.slice())
   }
 
+  const filterByCategory = (clickedCategory: string) => {
+    const result = dbProducts.filter(product => product.category === clickedCategory.toLowerCase());
+    setProducts(result);
+  }
+
 
   return (
     <div>
-     
-      <button onClick={sortAZ}>Sort A-Z</button>
-      <button onClick={sortZA}>Sort Z-A</button>
-      <button onClick={sortPriceAZ}>Sort price A-Z</button>
-      <button onClick={sortPriceZA}>Sort price Z-A</button>
-      <button onClick={sortRatingAZ}>Sort rating A-Z</button>
-      <button onClick={sortRatingZA}>Sort rating Z-A</button>
+     <CarouselGallery />
+      <SortButtons products={products} setProducts={setProducts} />
       <br /> 
       <button onClick={showAll}>All</button>
       {/* <button onClick={filterByElectronics}>Electronics</button>

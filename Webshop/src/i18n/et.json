@@ -1,14 +1,13 @@
 {
-    "nav": {
-        "home": "Avaleht",
-        "shops": "Poed",
-        "cart": "Ostukorv",
-        "admin": "Admin",
-        "Log in": "Logi sisse",
-        "Sign up": "Registreeru",
-        "Log out": "Logi välja",
-        "Contact": "Kontakt",
-        "Parcelmachines": "Pakiautomaadid"
-    }
-
+  "nav": {
+    "home": "Avaleht",
+    "shops": "Poed",
+    "cart": "Ostukorv",
+    "admin": "Admin",
+    "logIn": "Logi sisse",
+    "signUp": "Registreeru",
+    "logOut": "Logi välja",
+    "contact": "Kontakt",
+    "parcelMachines": "Pakiautomaadid"
+  }
 }

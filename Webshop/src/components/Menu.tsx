@@ -32,18 +32,17 @@ function Menu() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav>
-            <Nav.Link as={Link} to="/">{t("Home")}</Nav.Link>
-            <Nav.Link as={Link} to="/shops">{t("Shops")}</Nav.Link>
-            <Nav.Link as={Link} to="/cart">{t("Cart")}</Nav.Link>
-            {loggedIn === true && <Nav.Link as={Link} to="/admin">{t("Admin")}</Nav.Link>}
+            <Nav.Link as={Link} to="/">{t("nav.home")}</Nav.Link>
+            <Nav.Link as={Link} to="/shops">{t("nav.shops")}</Nav.Link>
+            <Nav.Link as={Link} to="/cart">{t("nav.cart")}</Nav.Link>
+            {loggedIn === true && <Nav.Link as={Link} to="/admin">{t("nav.admin")}</Nav.Link>}
           </Nav>
 
           <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/login">{t("Log in")}</Nav.Link>
-            <Nav.Link as={Link} to="/signup">{t("Sign up")}</Nav.Link>
-            {<button onClick={() => setLoggedIn(false)}>{t("Log out")}</button>}
-            <Nav.Link as={Link} to="/contact">{t("Contact")}</Nav.Link>
-            <Link to="/parcelmachines"><>{t("Parcel machines")}</></Link>
+            <Nav.Link as={Link} to="/login">{t("nav.logIn")}</Nav.Link>
+            <Nav.Link as={Link} to="/signup">{t("nav.signUp")}</Nav.Link>
+            {<button onClick={() => setLoggedIn(false)}>{t("nav.logOut")}</button>}
+            <Nav.Link as={Link} to="/contact">{t("nav.contact")}</Nav.Link>
           <div>{cartSum.toFixed(2)}€</div>
           </Nav>
         </Navbar.Collapse>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ParcelMachine } from "../../models/ParcelMachine";
+import { ParcelMachine } from "../models/ParcelMachine";
 
 
 function ParcelMachines() {

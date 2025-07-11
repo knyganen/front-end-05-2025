@@ -1,14 +1,13 @@
 {
-    "nav": {
-        "home": "Home",
-        "shops": "Shops",
-        "cart": "Cart",
-        "admin": "Admin",
-        "Log in": "Log in",
-        "Sign up": "sign up",
-        "Log out": "Log out",
-        "Contact": "Contact",
-        "Parcelmachines": "Parcelmachines"
-    }
-
+  "nav": {
+    "home": "Home",
+    "shops": "Shops",
+    "cart": "Cart",
+    "admin": "Admin",
+    "logIn": "Log in",
+    "signUp": "sign up",
+    "logOut": "Log out",
+    "contact": "Contact",
+    "parcelMachines": "Parcelmachines"
+  }
 }

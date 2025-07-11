@@ -6,6 +6,8 @@ import plusIcon from "../../assets/plus.png";
 import binIcon from "../../assets/bin.png";
 import { CartProduct } from "../../models/CartProduct";
 import { CartSumContext } from "../../context/CartSumContext";
+import ParcelMachines from "../../components/ParcelMachines";
+import Payment from "../../components/Payment";
 
 function Cart() {
   const [products, setProducts] = useState<CartProduct[]>(JSON.parse(localStorage.getItem("cart") || "[]"));
@@ -59,8 +61,14 @@ function Cart() {
 
   return (
     <div>
+      {products.length > 0 && 
+      <div>
       <button onClick={emptyCart}>Empty</button>
-      <div>Cart total: {products.length} products</div>
+      <div>Shopping cart: {products.length} products</div>
+
+      </div>
+      }
+      
       <br />
 
       {products.length === 0 ? (
@@ -99,7 +107,16 @@ function Cart() {
       )}
 
       <br />
-      <div>Cart total: {calculateTotal().toFixed(2)} €</div>
+      {products.length > 0 && 
+      <div>
+        <div>Cart total amount: {calculateTotal().toFixed(2)} €</div>
+        <ParcelMachines />
+        <Payment sum={calculateTotal()} />
+
+      </div>
+      
+      }
+      
     </div>
   );
 }
