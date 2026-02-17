@@ -8,7 +8,7 @@ function Payment(props: {sum: number}) {
             "timestamp": new Date(),
             "amount": props.sum,
             "order_reference": "abc" + Math.random() * 999999,
-            "customer_url": "https://webshop-katre.web.app/tellimus",
+            "customer_url": "https://katunyganen.ee/webshop/tellimus",
             "api_username": "e36eb40f5ec87fa2"
         };
         const headers = {

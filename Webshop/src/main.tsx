@@ -11,16 +11,18 @@ import { AuthContextProvider } from './context/AuthContextProvider.js'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter future={{
-      
-    v7_startTransition: true,
-    v7_relativeSplatPath: true
-  }}>
-    <CartSumContextProvider>
-      <AuthContextProvider>
-      <App />
-      </AuthContextProvider>
-    </CartSumContextProvider>
+    <BrowserRouter 
+      basename="/webshop"
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
+      <CartSumContextProvider>
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
+      </CartSumContextProvider>
     </BrowserRouter>
   </StrictMode>,
 )
